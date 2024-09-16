@@ -1,24 +1,15 @@
-name: matrix Demo
-on:
-    push
-        
+name: example-workflow
+on: 
+  push:
+    branches:
+      - main
 jobs:
-    build:
-        strategy:
-            matrix:
-                node-version: [12 , 14 , 16]
-                operating-system : [ubuntu-lates , windows-lates]
-            
-        runs-on: ${{matrix.operating-system}}
-        steps:
-            - name: Get the code
-              uses: actions/checkout@v3
-            - name: Install NodeJS
-              uses : actions/setup-node@v3
-              with:
-                node-version: ${{matrix.node-version}}
-            - name: Install Dependencies
-              run : npm ci
-            - name: Build Project
-              run : npm run build
-              
+  production-deploy:
+    if: github.repository == 'octo-org/octo-repo-prod'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '14'
+      - run: npm install -g bats
