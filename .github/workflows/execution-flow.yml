@@ -23,7 +23,7 @@ jobs:
 
       - name: Print input values
         run: |
-          echo "Deploying to environment: ${{ github.event.inputs.environment }}"
+          echo "Deploying to environment to : ${{ github.event.inputs.environment }}"
           echo "Enable Feature X: ${{ github.event.inputs.enableFeatureX }}"
 
       - name: Conditional step for Feature X
